@@ -1,23 +1,34 @@
-import logo from './logo.svg';
 import './App.css';
+import { CartProvider } from './cartcontext';
+import { RecipeProvider } from './contextapi';
+import Recipes from './recipes';
+import Searchrecipes from './searchrecipes';
+import {BrowserRouter as Router,Route,Switch} from "react-router-dom"
+import Cartdetails from './cartdetail';
+import Navbar from './Navbar';
+import {toast ,Zoom,Bounce} from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css"
+import Aboutus from './Aboutus';
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+      <RecipeProvider>
+        <CartProvider>
+          <Navbar/>
+        <Searchrecipes/>
+        <Switch>
+       <Route exact path="/" component={Recipes}/>
+       <Route exact path="/cart" component={Cartdetails}/>
+       <Route exact path="/aboutus" component={Aboutus}/>
+        </Switch>
+        </CartProvider>
+      </RecipeProvider>
+      </Router>
     </div>
   );
 }
